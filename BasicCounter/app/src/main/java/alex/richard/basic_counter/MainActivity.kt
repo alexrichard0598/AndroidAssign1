@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        updateCounter();
         binding.btnToast.setOnClickListener { showCount() }
         binding.btnUp.setOnClickListener {count(true)}
         binding.btnDown.setOnClickListener {count(false)}
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             count--;
         }
+        updateCounter();
+    }
+
+    private fun updateCounter() {
+        binding.Counter.text = count.toString();
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -39,5 +45,6 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState);
         count = savedInstanceState.getInt("count");
+        updateCounter();
     }
 }
